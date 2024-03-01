@@ -1,7 +1,7 @@
 ::modMODID <- {
 	ID = "mod_MODID",
 	Name = "Name_Of_Your_Mod",
-	Version = "0.1.0",
+	Version = "0.1.1",
 	// GitHubURL = "https://github.com/YOURNAME/mod_MODID",
 }
 
@@ -9,21 +9,19 @@
 ::modMODID.HooksMod.require(["mod_msu"]);
 
 ::modMODID.HooksMod.queue(">mod_msu", function() {
-	::mod_MODID.Mod <- ::MSU.Class.Mod(::mod_MODID.ID, ::mod_MODID.Version, ::mod_MODID.Name);
-	// ::mod_MODID.Mod.Registry.addModSource(::MSU.System.Registry.ModSourceDomain.GitHub, ::mod_MODID.GitHubURL);
-	// ::mod_MODID.Mod.Registry.setUpdateSource(::MSU.System.Registry.ModSourceDomain.GitHub);
+	::modMODID.Mod <- ::MSU.Class.Mod(::modMODID.ID, ::modMODID.Version, ::modMODID.Name);
+
+	// Add an official mod source and turn on automatic ingame reminder about new updates
+	// ::modMODID.Mod.Registry.addModSource(::MSU.System.Registry.ModSourceDomain.GitHub, ::mod_MODID.GitHubURL);
+	// ::modMODID.Mod.Registry.setUpdateSource(::MSU.System.Registry.ModSourceDomain.GitHub);
 
 	::include("mod_MODID/load");		// Load mod adjustments and other hooks
 	::include("mod_MODID/ui/load");		// Load JS Adjustments and Hooks
-
-	foreach (file in ::IO.enumerateFiles("mod_MODID/hooks"))	// This will load and execute all hooks that you created
-	{
-		::include(file);
-	}
 });
 
 // Checklist:
-// - replace all instances of "MODID" with your modid in uppercase letter. Within all files, aswell as for folder/file naming
+// - replace all instances of "modMODID" (in all files) with your mods global key handle of choice. This id should be unique enough to hopefully not ever be picked by someone else
+// - replace all instances of "mod_MODID" (in all files) with your modid of choice. Mods usually always start with "mod_". This id should be unique enough to hopefully not ever be picked by someone else
+// - replace all instances of "mod_MODID" in all existing folders and scriptnames
 // - replace the value of 'Name' with your written out mod name separated with spacebars
-// - 'Version' can probably stay at 0.1.0 for your first version/release
-// - if you don't use hooks, remove the hooks folder and the above ::includeFiles line
+// - 'Version' will normally start at 0.1.0 for your first version/release

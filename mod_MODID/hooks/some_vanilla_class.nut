@@ -20,7 +20,6 @@
 		}
 		return ret;
 	}
-	q.m.ResolveModifierPerWeight <- -0.01;
 
 	q.onUpdate = @() function( _properties )	// overwrite of hooked function
 	{

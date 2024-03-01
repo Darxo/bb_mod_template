@@ -16,7 +16,8 @@ This mod is a
 
 # Requirements
 
-- MSU
+- Modern Hooks
+- Modding Standards and Utilities (MSU)
 
 # Known Issues:
 

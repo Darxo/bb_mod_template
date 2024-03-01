@@ -2,20 +2,6 @@
 
 Write a short summary about what your mod does without going into specific. This text can then be copy&pasted and used whenever you publish the mod
 
-### Requirements ###
-
-- This mod is required to run this mod
-- This other mod is required with atleast the version X to run this mod
-Examples:
-- Modding Script Hooks
-- Modding Standards and Utilities (MSU)
-
-### Known Issues: ###
-
-- Use this as an unsorted list of all the major or minor problems/issues that this mod has
-- This can be everything from bugs, crashes and exploits to missing content or realism issues
-- This list will help users of your mod to quickly find out whether a issue they encountered with your mod is already known to you
-
 ### Future Plans: ###
 
 - This is a checklist of ideas that you consider adding to the mod in the future
@@ -24,12 +10,8 @@ Examples:
 
 ### Changes: ###
 
-0.2.0
-	- adds some_feature
-	- adds some_content
-
 0.1.1
-	- fixes some_bug
+	- vastly rework and improve template using modern hooks
 
 0.1.0
-	- released on some_platform
+	- released on discord
