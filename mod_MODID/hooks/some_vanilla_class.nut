@@ -1,18 +1,29 @@
-::mods_hookNewObject("vanilla/path/to/class/and/classname", function(o)
-{
-    ::logWarning("classname hooked successfully");
-    local oldVanillaFunction = o.vanillaFunction;
-    o.vanillaFunction = function( _argument1, _argument2 )
-    {
-        ::logWarning("vanillaFunction hooked");
-        oldVanillaFunction( _argument1, _argument2 );
-    }
+::mod_MODID.HooksMod.hook("scripts/path/to/class", function(q) {
+	q.m.CustomMult <- 1.3;	// new member variables
 
-    // When we can't guarantee that the target class has this function (but know for sure its base class has) we need to use getMember and mod_override
-    local oldVanillaBaseFunction = ::mods_getMember(o, "vanillaBaseFunction");
-    ::mods_override(o, "vanillaBaseFunction", function( _argument1 )
-    {
-        ::logWarning("vanillaBaseFunction hooked");
-        oldVanillaBaseFunction(_argument1);
-    });
+	q.create = @(__original) function()
+	{
+		__original();
+		// Change member values here
+	}
+
+	q.getTooltip = @(__original) function()
+	{
+		local ret = __original();
+		foreach (index, entry in ret)
+		{
+			if (entry.id == 8 && entry.text.find("STRING_IDENTIFIER") != null)
+			{
+				ret.remove(index);	// Remove tooltip entry with id 8 and whose text has "STRING_IDENTIFIER" somewhere
+				break;
+			}
+		}
+		return ret;
+	}
+	q.m.ResolveModifierPerWeight <- -0.01;
+
+	q.onUpdate = @() function( _properties )	// overwrite of hooked function
+	{
+		_properties.SomeMult *= this.m.CustomMult;
+	}
 });

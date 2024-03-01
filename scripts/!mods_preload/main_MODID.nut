@@ -2,23 +2,19 @@
 	ID = "mod_MODID",
 	Name = "Name_Of_Your_Mod",
 	Version = "0.1.0",
-	Const = {
-		// Write your Const-Variables in here.
-		// These variables are not supposed to be tweaked by users.
-		// They are often carefully chosen and changing them likely breaks the mod
-	},
-	Config = {
-		// Write your Configurable Variables in here.
-		// These variables are there to be tweaked by the modder or users to their liking.
-		// Changing them within boundaries is usually encouraged.
-	}
+	// GitHubURL = "https://github.com/YOURNAME/mod_MODID",
 }
 
-::mods_registerMod(::modMODID.ID, ::modMODID.Version, ::modMODID.Name);
+::modMODID.HooksMod <- ::Hooks.register(::modMODID.ID, ::modMODID.Version, ::modMODID.Name);
+::modMODID.HooksMod.require(["mod_msu"]);
 
-::mods_queue(::modMODID.ID, "mod_msu", function()
-{
-	::modMODID.Mod <- ::MSU.Class.Mod(::modMODID.ID, ::modMODID.Version, ::modMODID.Name);
+::modMODID.HooksMod.queue(">mod_msu", function() {
+	::mod_MODID.Mod <- ::MSU.Class.Mod(::mod_MODID.ID, ::mod_MODID.Version, ::mod_MODID.Name);
+	// ::mod_MODID.Mod.Registry.addModSource(::MSU.System.Registry.ModSourceDomain.GitHub, ::mod_MODID.GitHubURL);
+	// ::mod_MODID.Mod.Registry.setUpdateSource(::MSU.System.Registry.ModSourceDomain.GitHub);
+
+	::include("mod_MODID/load");		// Load mod adjustments and other hooks
+	::include("mod_MODID/ui/load");		// Load JS Adjustments and Hooks
 
 	foreach (file in ::IO.enumerateFiles("mod_MODID/hooks"))	// This will load and execute all hooks that you created
 	{
